@@ -1,0 +1,37 @@
+<div class="page">
+
+  <fury-breadcrumbs [@fadeInRight] current="Drag & Drop"></fury-breadcrumbs>
+
+  <div [@fadeInUpStagger]
+       cdkDropListGroup
+       fxLayout="row"
+       fxLayout.lt-sm="column"
+       fxLayoutAlign="start start"
+       fxLayoutGap="24px">
+    <fury-card class="basic-forms" fadeInUpStaggerElement fxFlex="auto">
+      <fury-card-header>
+        <fury-card-header-heading>To-Do Tasks</fury-card-header-heading>
+        <fury-card-header-subheading>Simply Drag & Drop items in your order</fury-card-header-subheading>
+      </fury-card-header>
+      <fury-card-content cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)">
+        <div class="task card" *ngFor="let task of todo" cdkDrag fxLayout="column" fxLayoutAlign="center start">
+          <div class="heading">{{ task.name }}</div>
+          <div class="caption secondary-text">{{ task.due }}</div>
+        </div>
+      </fury-card-content>
+    </fury-card>
+
+    <fury-card class="basic-forms" fadeInUpStaggerElement fxFlex="auto">
+      <fury-card-header>
+        <fury-card-header-heading>Done Tasks</fury-card-header-heading>
+        <fury-card-header-subheading>Drag between lists and inside lists</fury-card-header-subheading>
+      </fury-card-header>
+      <fury-card-content cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
+        <div class="task card" *ngFor="let task of done" cdkDrag fxLayout="row" fxLayoutAlign="space-between center">
+          <div>{{ task.name }}</div>
+          <mat-icon>done</mat-icon>
+        </div>
+      </fury-card-content>
+    </fury-card>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="padding">
+  <fury-breadcrumbs current="Registrar Cliente"
+                    [crumbs]="['Configuración', 'Adicionales']"></fury-breadcrumbs>
+  <div fxLayout="column">
+    <div fxLayout="row" fxFlex="noshrink">
+      <mat-card class="mat-card-style" fxFlex="80%" fxFlexOffset="10%">
+        <mat-card-title>
+          Registrar Cliente
+        </mat-card-title>
+        <mat-card-content>
+          <form fxLayout="column" fxLayout.lt-sm="column" [formGroup]="clienteForm" fxLayoutGap="10px">
+            <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="16px">
+              <mat-divider></mat-divider>
+            </div>
+            <mat-form-field>
+              <mat-label>Nombres Completos</mat-label>
+              <input matInput formControlName="nombre">
+              <mat-error *ngFor="let validation of errors.cliente.nombre">
+                <mat-error class="error-message" *ngIf="clienteForm.get('nombre').hasError(validation.type)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Apellidos Compeltos</mat-label>
+              <input matInput formControlName="apellido">
+              <mat-error *ngFor="let validation of errors.cliente.apellido">
+                <mat-error class="error-message" *ngIf="clienteForm.get('apellido').hasError(validation.type)">
+                  {{validation.message}}
+                </mat-error>
+              </mat-error>
+            </mat-form-field>
+
+            <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="16px">
+              <mat-form-field fxFlex>
+                <mat-label>Edad</mat-label>
+                <input matInput formControlName="edad">
+                <mat-error *ngFor="let validation of errors.cliente.edad">
+                  <mat-error class="error-message" *ngIf="clienteForm.get('edad').hasError(validation.type)">
+                    {{validation.message}}
+                  </mat-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input [matDatepicker]="datepickerDeliveryDate" matInput formControlName="fecha_nacimiento">
+                <mat-datepicker-toggle [for]="datepickerDeliveryDate" matSuffix></mat-datepicker-toggle>
+                <mat-error *ngFor="let validation of errors.cliente.fecha_nacimiento">
+                  <mat-error class="error-message"
+                             *ngIf="clienteForm.get('fecha_nacimiento').hasError(validation.type)">
+                    {{validation.message}}
+                  </mat-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-datepicker #datepickerDeliveryDate></mat-datepicker>
+            </div>
+
+            <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="16px" fxFlexAlign="end">
+              <button mat-raised-button color="accent" (click)="guardarCliente()"
+                      [disabled]=" submitted || !clienteForm.valid">
+                REGISTRAR
+              </button>
+              <button mat-raised-button (click)="calcelar()" type="button">CANCELAR</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

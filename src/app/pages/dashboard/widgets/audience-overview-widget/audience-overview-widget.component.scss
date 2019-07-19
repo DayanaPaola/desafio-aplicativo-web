@@ -1,0 +1,55 @@
+@import "var";
+
+:host {
+  height: 100%;
+}
+
+.header {
+
+  .property {
+    padding: $spacing;
+    cursor: pointer;
+    border-top: 4px solid transparent;
+
+    .label {
+      @include mat-typography-level-to-styles($config, body-1);
+      padding-bottom: $spacing/4;
+    }
+
+    .value {
+      @include mat-typography-level-to-styles($config, headline);
+      font-weight: 300;
+    }
+
+    .gain {
+      @include mat-typography-level-to-styles($config, caption);
+
+      .icon {
+        font-size: 13px;
+        height: 13px;
+        width: 13px;
+        vertical-align: middle;
+      }
+    }
+
+    .compared {
+      @include mat-typography-level-to-styles($config, caption);
+      visibility: hidden;
+    }
+  }
+}
+
+.content {
+  max-width: 100%;
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.actions {
+  .select {
+    width: auto;
+    max-width: 100px;
+    font-size: 14px;
+  }
+}

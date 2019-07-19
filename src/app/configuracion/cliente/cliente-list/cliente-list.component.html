@@ -1,0 +1,32 @@
+<div class="padding">
+  <fury-breadcrumbs current="Mantenimiento de Clientes" [crumbs]="['Configuración', 'Cliente']"></fury-breadcrumbs>
+
+  <div [@fadeInUp] class="list">
+    <!--<fury-list name="Customers" [columns]="columns" (filterChange)="onFilterChange($event)">-->
+    <fury-list name="Cliente">
+      <div class="actions">
+        <button class="create" (click)="crearCliente()" type="button" mat-mini-fab color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <mat-table [dataSource]="clientes">
+
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef> NOMBRE</mat-header-cell>
+          <mat-cell *matCellDef="let data"> {{data.nombre}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="apellido">
+          <mat-header-cell *matHeaderCellDef> APELLIDO</mat-header-cell>
+          <mat-cell *matCellDef="let data"> {{data.apellido}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </fury-list>
+  </div>
+</div>
+
+
