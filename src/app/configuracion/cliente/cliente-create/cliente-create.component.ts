@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, PatternValidator, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Cliente} from '../../shared/models/cliente.model';
 import {ClienteService} from '../../shared/service/cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {errorMessages} from '../../../shared/custom-messages';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-cliente-create',
@@ -14,12 +15,19 @@ import {errorMessages} from '../../../shared/custom-messages';
 export class ClienteCreateComponent implements OnInit {
 
   clienteForm: FormGroup;
-  cliente = new Cliente();
+  cliente: Cliente = {
+    nombre: '',
+    apellido: '',
+    edad: 0,
+    fecha_nacimiento: new Date(),
+  };
   submitted = false;
   errors = errorMessages;
+  successMsg: string = '';
 
   constructor(private clienteService: ClienteService,
               private router: Router,
+              private firestore: AngularFirestore,
               private route: ActivatedRoute,
               private snackbar: MatSnackBar,
               private fb: FormBuilder) {
@@ -39,8 +47,8 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   guardarCliente() {
-    const cli = new Cliente(this.clienteForm.value);
-    cli.id = this.cliente.id;
+    const cli = this.clienteForm.value;
+    console.log(cli);
     this.clienteService.saveCliente(cli);
     this.clienteForm.reset();
     this.router.navigate(['/configuracion', 'cliente']);

@@ -1,19 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Cliente} from '../models/cliente.model';
 import {map} from 'rxjs/operators';
-import actions from '@angular/fire/schematics/deploy/actions';
 
 @Injectable({providedIn: 'root'})
 export class ClienteService {
 
   clientes: Observable<any[]>;
   clienteCollection: AngularFirestoreCollection<Cliente>;
-  clienteDoc: AngularFirestoreDocument<Cliente>;
+  successMsg = 'Se registró el cliente de forma correcta.';
 
   constructor(private afs: AngularFirestore) {
-    /*this.clientes = afs.collection('cliente').valueChanges();*/
     this.clienteCollection = afs.collection<Cliente>('cliente');
     this.clientes = this.clienteCollection.snapshotChanges().pipe(
       map(accion => accion.map(
@@ -31,7 +29,7 @@ export class ClienteService {
   }
 
   saveCliente(cliente: Cliente) {
-    this.clienteCollection.add(cliente);
+    this.clienteCollection.add(cliente).then(_ => alert(this.successMsg));
   }
 
 }

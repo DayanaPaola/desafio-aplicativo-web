@@ -14,7 +14,6 @@ export const errorMessages = {
     ],
     fecha_nacimiento: [
       {type: 'required', message: 'La fecha de nacimiento es requerido.'},
-      {type: 'maxlength', message: 'El símbolo de la moneda debe tener máximo 10 caracteres'},
     ]
   }
 };

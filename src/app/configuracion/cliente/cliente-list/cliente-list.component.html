@@ -22,11 +22,33 @@
           <mat-cell *matCellDef="let data"> {{data.apellido}}</mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="edad">
+          <mat-header-cell *matHeaderCellDef> EDAD</mat-header-cell>
+          <mat-cell *matCellDef="let data"> {{data.edad}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_nacimiento">
+          <mat-header-cell *matHeaderCellDef> FECHA DE NACIMIENTO</mat-header-cell>
+          <mat-cell *matCellDef="let data"> {{data.fecha_nacimiento.toDate() | date: 'dd/MM/yyyy'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="posible_muerte">
+          <mat-header-cell *matHeaderCellDef> FECHA DE POSIBLE MUERTE</mat-header-cell>
+          <mat-cell *matCellDef="let data"> {{posible_muerte | date: 'dd/MM/yyyy'}}</mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </fury-list>
   </div>
+</div>
+
+<div class="padding">
+  <table>
+      <h2>PROMEDIO EDAD</h2>
+      <p> {{promedioEdad}}</p>
+  </table>
 </div>
 
 

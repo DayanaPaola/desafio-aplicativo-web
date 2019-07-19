@@ -15,7 +15,9 @@ import {fadeInUpAnimation} from '../../../../@fury/animations/fade-in-up.animati
 export class ClienteListComponent implements OnInit {
 
   clientes: Cliente[] = [];
-  displayedColumns = ['nombre', 'apellido'];
+  posible_muerte;
+  promedioEdad: number;
+  displayedColumns = ['nombre', 'apellido', 'edad', 'fecha_nacimiento', 'posible_muerte'];
 
   constructor(private clienteService: ClienteService,
               private router: Router,
@@ -28,13 +30,21 @@ export class ClienteListComponent implements OnInit {
 
   listaClientes() {
     this.clienteService.getClientes().subscribe((data: any) => {
-      console.log(data);
       this.clientes = data;
+
+      this.promedioEdad = this.calcularPromedioEdades(this.clientes);
+      /*this.posible_muerte = (data.fecha_nacimiento.toDateString().setFullYear(data.fecha_nacimiento.toDateString().getFullYear() + 50));*/
     });
   }
 
   crearCliente() {
     this.router.navigate(['/configuracion', 'cliente', 'create']);
+  }
+
+  calcularPromedioEdades(clientes: Cliente[]) {
+    let sumaEdades = 0;
+    sumaEdades = clientes.reduce((a, b) => a + b.edad, 0);
+    return sumaEdades / clientes.length;
   }
 
 }
